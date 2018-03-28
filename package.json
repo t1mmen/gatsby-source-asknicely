@@ -1,6 +1,6 @@
 {
   "name": "gatsby-source-asknicely",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Gatsby source plugin for loading testimonials from AskNicely",
   "main": "gatsby-node.js",
   "scripts": {
