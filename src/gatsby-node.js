@@ -1,6 +1,6 @@
 const crypto = require("crypto");
 const axios = require("axios");
-const unescape = require("lodash.unescape");
+const h3 = require("he");
 
 exports.sourceNodes = async (
   { boundActionCreators: { createNode } },
@@ -33,7 +33,7 @@ exports.sourceNodes = async (
     const gatsbyNode = {
       ...testimonial,
       id: testimonial.response_id,
-      comment: unescape(testimonial.comment),
+      comment: he.unescape(testimonial.comment),
       children: [],
       parent: "__SOURCE__",
       internal: {
