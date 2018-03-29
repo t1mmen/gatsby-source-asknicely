@@ -1,6 +1,6 @@
 {
   "name": "gatsby-source-asknicely",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Gatsby source plugin for loading testimonials from AskNicely",
   "main": "gatsby-node.js",
   "scripts": {
@@ -21,7 +21,8 @@
   "author": "Timm Stokke <timm@stokke.me>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.16.2"
+    "axios": "^0.16.2",
+    "lodash.unescape": "^4.0.1"
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",

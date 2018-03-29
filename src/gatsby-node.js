@@ -1,5 +1,6 @@
-const crypto = require('crypto');
-const axios = require('axios');
+const crypto = require("crypto");
+const axios = require("axios");
+const unescape = require("lodash.unescape");
 
 exports.sourceNodes = async (
   { boundActionCreators: { createNode } },
@@ -7,23 +8,23 @@ exports.sourceNodes = async (
     subdomain,
     apiKey,
     queryParams = {
-      filter: 'published',
+      filter: "published",
       sinceTime: 0,
-      sort: 'desc',
+      sort: "desc",
       pageSize: 50,
-      pageNumber: 1,
-    },
+      pageNumber: 1
+    }
   }
 ) => {
   const { filter, sinceTime, sort, pageSize, pageNumber } = queryParams;
   const axiosClient = axios.create({
-    baseURL: `https://${subdomain}.asknice.ly/api/v1/responses/`,
+    baseURL: `https://${subdomain}.asknice.ly/api/v1/responses/`
   });
 
   // Get list of all testimonials
   const { data: { data } } = await axiosClient.get(
     `/${sort}/${pageSize}/${pageNumber}/${sinceTime}/json/${filter}`,
-    { params: { 'X-apikey': apiKey } }
+    { params: { "X-apikey": apiKey } }
   );
 
   // Create nodes for testimonials
@@ -34,15 +35,15 @@ exports.sourceNodes = async (
       id: testimonial.response_id,
       comment: unescape(testimonial.comment),
       children: [],
-      parent: '__SOURCE__',
+      parent: "__SOURCE__",
       internal: {
-        type: 'AskNicelyTestimonial',
+        type: "AskNicelyTestimonial",
         content: jsonString,
         contentDigest: crypto
-          .createHash('md5')
+          .createHash("md5")
           .update(jsonString)
-          .digest('hex'),
-      },
+          .digest("hex")
+      }
     };
     // Insert data into gatsby
     createNode(gatsbyNode);
